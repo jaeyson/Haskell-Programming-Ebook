@@ -69,3 +69,64 @@
     - (&lambda;z1.z((&lambda;x.a)(z1)))
     - (&lambda;z1.za)
 
+---
+
+## Application
+
+|     Lambda   |    Code    |
+|:------------:|:----------:|
+| &fnof; a     | f(a)       |
+| &fnof; a b   | f(a) (b)   |
+| (&fnof; a) b | (f(a)) (b) |
+| &fnof; (a b) | f (a (b))  |
+
+## Abstraction
+
+|        Expression       |      Code     |
+|:-----------------------:|:-------------:|
+| &lambda;a.b             | a => b        |
+| &lambda;a.b x           | a => b(x)     |
+| &lambda;a.(b x)         | a => (b(x))   |
+| (&lambda;a.b) x         | (a => b) (x)  |
+| &lambda;a.&lambda;b.a   | a => b => a   |
+| &lambda;a.(&lambda;b.a) | a => (b => a) |
+
+---
+
+&lambda;a.a <-- Lambda Expression
+
+&lambda; <-- Function Signifier
+
+&lambda;a <-- head
+
+a <-- body
+
+`.` <-- separates head and body
+
+```
+Expression :: = Variable                        Identifier
+              | Expression Expression           Application
+              | &lambda; Variable Expression    Abstraction
+              | (Expression)                    Grouping
+```
+
+|     Name    |           Expression          |                   |
+|:-----------:|:-----------------------------:|:-----------------:|
+| Ibis        | &lambda;a.a                   | Identity          |
+| Mockingbird | &lambda;&fnof;.&fnof;&fnof;   | Self-application  |
+| Kestrel     | &lambda;ab.a                  | First, const      |
+| Kite        | &lambda;ab.b                  | Second            |
+| Cardinal    | &lambda;&fnof;ab.&fnof;ba     | Reverse argumemts |
+| Blackbird   | &lambda;&fnof;ga.&fnof;(ga)   | Composition       |
+| Bluebird    | &lambda;&fnof;gab.&fnof;(gab) | Composition       |
+| Starling    | &lambda;abc.ac(bc)            |                   |
+
+|  Name |             Expression           |           |
+|:-----:|:--------------------------------:|:---------:|
+| True  | &lambda;ab.a                     | Kestrel   |
+| False | &lambda;ab.b                     | Kite/CK   |
+| NOT   | &lambda;p.pFT OR C               |           |
+| AND   | &lambda;pq.pqF OR &lambda;pq.pqp | Second    |
+| BEQ   | &lambda;pq.p q (NOT q)           | Equality  |
+| OR    | &lambda;pq.pTp OR &lambda;pq.ppq | MB*       |
+where * is N of args
